@@ -29,6 +29,8 @@ router.post("/", async (req, res) => {
   // User login
 router.post("/login", async (req, res) => {
     try {
+
+      console.log("hi from login");
       const { email, password } = req.body;
   
       const user = await UserModel.findOne({ email });
@@ -51,6 +53,35 @@ router.post("/login", async (req, res) => {
       res.status(500).json({ error: "Failed to login" });
     }
   });
+
+  // retrieve current user
+  router.get('/current', async (req, res) => {
+    console.log('current user api')
+    const { userId } = req.query;
+
+    console.log(userId);
+    try {
+      console.log("inside current user to get the id")
+      
+      // Retrieve the user from the database
+      const user = await UserModel.findById(userId);
   
+      // Check if the user exists
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      // Extract the required user information
+      const { _id, name, email } = user;
+  
+      // Send the response with the user information
+      res.json(user);
+    } catch (error) {
+      console.error('Error retrieving current user:', error.message);
+      res.status(500).json({ error: 'An error occurred while retrieving the current user' });
+    }
+  });
+  
+
   
   module.exports = router;
