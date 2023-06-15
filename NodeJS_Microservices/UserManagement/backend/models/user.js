@@ -5,8 +5,9 @@ const userSchema = new mongoose.Schema({
     name:{ type: String, required: true},
     email:{type: String, required: true},
     password:{type: String, required: true},
+    role:{type: String, required: true},
     address:{type: String},
-    
+    driver_id: {type: String, required: true},
 });
 
 // Hash the user password before saving
@@ -14,7 +15,7 @@ userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
       return next();
     }
-  
+
     try {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(this.password, salt);
@@ -24,7 +25,7 @@ userSchema.pre("save", async function (next) {
       next(err);
     }
   });
-  
+
   // Compare the user password with the provided password
   userSchema.methods.comparePassword = async function (password) {
     try {
