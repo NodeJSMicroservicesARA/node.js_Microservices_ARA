@@ -1,0 +1,20 @@
+{
+  "name": "node.js_microservices_ara",
+  "version": "1.0.0",
+  "description": "node.js_Microservices_ARA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aterminate/node.js_Microservices_ARA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aterminate/node.js_Microservices_ARA/issues"
+  },
+  "homepage": "https://github.com/Aterminate/node.js_Microservices_ARA#readme"
+}
