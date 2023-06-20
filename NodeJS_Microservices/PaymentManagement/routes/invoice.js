@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
 
   const { id } = req.query;
   console.log(id);
-    /*   try {
+     try {
         const response = await axios.get(`http://localhost:8081/users/getdriver/${id}`);
           const driverId = response.data._id; // Access the _id property from the response data
           // Extract the invoice details from the request body
@@ -26,6 +26,6 @@ router.post("/", async (req, res) => {
           } catch (error) {
       console.error('Error:', error); // Log the error object
       res.status(500).json({ error: "Failed to retrieve data from microservice" });
-      } */
+      } 
 });
 module.exports = router;

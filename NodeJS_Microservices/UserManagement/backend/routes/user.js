@@ -66,6 +66,7 @@ router.post("/", async (req, res) => {
     //res.status(500).json({ message: 'An error occurred' });
   }
 });
+
   // retrieve current user
   router.get('/current', async (req, res) => {
     console.log('current user api')
@@ -93,6 +94,55 @@ router.post("/", async (req, res) => {
       res.status(500).json({ error: 'An error occurred while retrieving the current user' });
     }
   });
+
+//deactivate user
+// router.put("/deactivate/:id", async (req, res) => {
+//   const userId = req.params.id;
+
+//   try {
+//     // Find the user by ID
+//     const user = await UserModel.findById(userId);
+
+//     // Check if the user exists
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+
+//     // Deactivate the user
+//     user.active = false;
+//     await user.save();
+
+//     res.status(200).json({ message: "User deactivated successfully" });
+//   } catch (error) {
+//     console.error("Failed to deactivate the user", error);
+//     res.status(500).json({ error: "Failed to deactivate user" });
+//   }
+// });
+
+
+router.put("/activate-deactivate/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Find the user by ID
+    const user = await UserModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Toggle the status (if it's true, set to false; if it's false, set to true)
+    user.status = !user.status;
+    await user.save();
+
+    const statusMessage = user.status ? "User activated" : "User deactivated";
+    res.status(200).json({ message: statusMessage });
+  } catch (error) {
+    console.error("Failed to activate or deactivate the user", error);
+    res.status(500).json({ error: "Failed to activate or deactivate user" });
+  }
+});
 
 
 

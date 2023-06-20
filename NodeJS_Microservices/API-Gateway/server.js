@@ -25,6 +25,11 @@ const server = gateway({
             prefix:"/payment",
             target:"http://localhost:8084/",
             hooks:{},
+        },
+        {
+            prefix:"/insurance",
+            target:"http://localhost:8085/",
+            hooks:{},
         }
     ]
 });
