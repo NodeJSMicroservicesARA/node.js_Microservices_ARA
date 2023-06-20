@@ -1,11 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const express   = require("express");
+const router    = express.Router();
 const UserModel = require("../models/user");
-const jwt = require("jsonwebtoken");
+const jwt       = require("jsonwebtoken");
 
 
 // Create a new user
-router.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
+    const { name, email, password, role, address, driver_id } = req.body;
     try {
       const { name, email, password, role, address, driver_id } = req.body;
 
@@ -13,21 +14,18 @@ router.post("/", async (req, res) => {
       if (userExists) {
         return res.status(400).json({ error: "Email already exists" });
       }
-
-
       const user = new UserModel({ name, email, password, role, address, driver_id });
       await user.save();
-
       res.status(201).json({ message: "User created successfully" });
 
     } catch (err) {
       console.error("Failed to create the user", err);
       res.status(500).json({ error: "Failed to create user" });
     }
-  });
+});
 
-  // User login
-  router.post("/login", async (req, res) => {
+// User login
+router.post("/login", async (req, res) => {
     try {
 
       console.log("hi from login");
@@ -52,23 +50,24 @@ router.post("/", async (req, res) => {
       console.error("Failed to login", err);
       res.status(500).json({ error: "Failed to login" });
     }
-  });
+});
 
- // Example route to fetch user information by driver ID
- router.get('/getdriver/:id', async (req, res) => {
+// Example route to fetch user information by driver ID
+router.get('/getdriver/:id', async (req, res) => {
   const driverId = req.params.id;
 
   try {
     const user = await UserModel.findOne({ driver_id: driverId });
-   // res.json(user);
+    res.json(user);
   } catch (error) {
     console.error(error);
     //res.status(500).json({ message: 'An error occurred' });
   }
 });
 
-  // retrieve current user
-  router.get('/current', async (req, res) => {
+
+// retrieve current user
+router.get('/current', async (req, res) => {
     console.log('current user api')
     const { userId } = req.query;
 
@@ -93,7 +92,7 @@ router.post("/", async (req, res) => {
       console.error('Error retrieving current user:', error.message);
       res.status(500).json({ error: 'An error occurred while retrieving the current user' });
     }
-  });
+});
 
 //deactivate user
 // router.put("/deactivate/:id", async (req, res) => {
@@ -143,7 +142,4 @@ router.put("/activate-deactivate/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to activate or deactivate user" });
   }
 });
-
-
-
-  module.exports = router;
+ module.exports = router;

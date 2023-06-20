@@ -4,17 +4,17 @@ const router = express.Router();
 const EmergencyModel = require('../models/emergency');
 
 // Create a new emergency
-router.post('/', async (req, res) => {
+router.post('/create', async (req, res) => {
   try {
-    // console.log("get emergency");
+    console.log("get emergency");
     const { userId } = req.query;
     console.log("get emergency user: ", userId);
-    
+
     const { callerName, phoneNumber, emergencyType, location } = req.body;
 
     // Make a request to User Management service to retrieve user information
    const response = await axios.get(`http://localhost:8081/users/current/?userId=${userId}`);
-    
+
     console.log("response :", response.data);
 
     // res.json(response.data);
@@ -33,16 +33,16 @@ router.post('/', async (req, res) => {
     res.status(201).json({
       message: 'Emergency created successfully'
     });
-    
+
   } catch (error) {
     console.error('Error creating emergency:', error.message);
     res.status(500).json({
       error: 'An error occurred while creating the emergency'
     });
   }
-  
+
 });
-// test 
+// test
 router.get('/', async (req, res) => {
   console.log("Emergency response get api ");
 });

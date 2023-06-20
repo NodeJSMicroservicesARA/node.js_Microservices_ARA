@@ -26,6 +26,6 @@ router.post("/", async (req, res) => {
           } catch (error) {
       console.error('Error:', error); // Log the error object
       res.status(500).json({ error: "Failed to retrieve data from microservice" });
-      } 
+      }
 });
 module.exports = router;

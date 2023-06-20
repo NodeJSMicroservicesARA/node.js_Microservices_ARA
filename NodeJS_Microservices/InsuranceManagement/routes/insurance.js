@@ -1,9 +1,10 @@
 const express = require('express');
-const router  = express.Router();
+const router = express();
 const Insurance = require('../models/insurance');
 
 // create a new insurance claim
 router.post('/claim/create', async (req, res) => {
+  console.log('hit');
   const { policy_number, damage_estimate, repair_cost, status } = req.body;
 
   // Check if all required fields are present
@@ -97,11 +98,11 @@ router.put('/claim/update/:claim_id', async (req, res) => {
     }
     if( repair_cost != null ){
       claim.repair_cost = repair_cost;
-    }  
+    }
     if( status != null ){
       claim.status = status;
-    }  
-    
+    }
+
 
     // Save the updated claim to the database
     await claim.save();

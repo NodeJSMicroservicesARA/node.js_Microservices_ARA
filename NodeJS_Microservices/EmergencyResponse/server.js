@@ -25,7 +25,7 @@ app.get("/microservice", async (req, res) => {
 
     try {
 
-    const response = await axios.get("http://localhost:8081/users/current/?userId=64804a5f0737e1afcd86ef4b");
+    const response = await axios.get("http://localhost:8081/users/current/?userId=6491fa3d51a759aa5f647417");
 
     console.log('Response:', response.data); // Log the received data
 

@@ -1,5 +1,6 @@
-const mongoose  = require("mongoose");
-const mongoURI  = "mongodb+srv://maisaaalkhder005:rci9rbcD3IumsDxR@cluster0.8etzoio.mongodb.net/";
+const mongoose = require("mongoose");
+
+const mongoURI  = "mongodb+srv://helloaysha178:IMFzwN21EJBObmjk@cluster0.pqmbc17.mongodb.net/";
 const connectDB = async () => {
   try {
     await mongoose.connect(mongoURI, {

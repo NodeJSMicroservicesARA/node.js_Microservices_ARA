@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     role:{type: String, required: true},
     address:{type: String},
     driver_id: {type: String, required: true},
-    status:{type: Boolean, default:true}
+    status: { type: Boolean, default:true}
 });
 
 // Hash the user password before saving
