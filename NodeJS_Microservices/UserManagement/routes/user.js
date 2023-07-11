@@ -6,6 +6,7 @@ const jwt       = require("jsonwebtoken");
 
 // Create a new user
 router.post("/create", async (req, res) => {
+  console.log("create user");
     const { name, email, password, role, address, driver_id } = req.body;
     try {
       const { name, email, password, role, address, driver_id } = req.body;

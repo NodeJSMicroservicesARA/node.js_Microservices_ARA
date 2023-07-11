@@ -3,10 +3,11 @@ const axios = require('axios');
 const router = express.Router();
 const EmergencyModel = require('../models/emergency');
 
-// Create a new emergency
+// Create a new emergency //http://localhost:8082/emergencies/create?userId=<userId>
+
 router.post('/create', async (req, res) => {
   try {
-    console.log("get emergency");
+    console.log("create emergency");
     const { userId } = req.query;
     console.log("get emergency user: ", userId);
 
@@ -14,7 +15,6 @@ router.post('/create', async (req, res) => {
 
     // Make a request to User Management service to retrieve user information
    const response = await axios.get(`http://localhost:8081/users/current/?userId=${userId}`);
-
     console.log("response :", response.data);
 
     // res.json(response.data);
